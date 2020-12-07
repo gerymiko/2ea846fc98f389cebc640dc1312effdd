@@ -15,13 +15,13 @@
 	$mail->isSMTP();
 	$mail->Host = 'smtp.mailtrap.io';
 	$mail->SMTPAuth = true;
-	$mail->Username = '49c4e7d9ca4610';
-	$mail->Password = '45f1cbf019d706';
+	$mail->Username = '49c4e7d9ca4610xx';
+	$mail->Password = '45f1cbf019d706xx';
 	$mail->SMTPSecure = 'tls';
 	$mail->Port = 2525;
 	
-	$from = "iamsender@odeo.tech";
-	$to = "iamreceiver@odeo.tech";
+	$from = "gery.merdiko@gmail.com";
+	$to = "gerry.darkseeker@gmail.com";
 
 	$mail->setFrom($from);
 	$mail->addAddress($to);
