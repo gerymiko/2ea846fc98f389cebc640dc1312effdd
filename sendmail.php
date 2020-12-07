@@ -1,5 +1,12 @@
 <?php
 
+	$db_handle = pg_connect("host=localhost dbname=sendmail user=postgres password=123");
+	if ($db_handle) {
+		echo 'Connection attempt succeeded.';
+	} else {
+		echo 'Connection attempt failed.';
+	}
+
 	use PHPMailer\PHPMailer\PHPMailer;
 	require_once './vendor/autoload.php';
 
@@ -12,18 +19,27 @@
 	$mail->Password = '45f1cbf019d706';
 	$mail->SMTPSecure = 'tls';
 	$mail->Port = 2525;
+	
+	$from = "iamsender@odeo.tech";
+	$to = "iamreceiver@odeo.tech";
 
-	$mail->setFrom('hahaha@odeo.tech', 'Your Company');
-	$mail->addAddress('me@gmail.com', 'Me');
-	$mail->Subject = 'Thanks for choosing Me!';
+	$mail->setFrom($from);
+	$mail->addAddress($to);
+	$subjects = $mail->Subject = 'Thanks for choosing Me!';
 
-	$mail->isHTML(TRUE);
-	$mail->Body = '<html>Lorem <br>ipsum.</br> Dolor.</html>';
-	$mail->AltBody = 'Sit amet.';
+	// $mail->isHTML(TRUE);
+	$mails = $mail->Body = 'Lorem ipsum Dolor';
 
-	if(!$mail->send()){
-	    echo 'Message could not be sent.';
-	    echo 'Mailer Error: ' . $mail->ErrorInfo;
+	$query = pg_query($db_handle, "INSERT  INTO tblmail(sender, receiver, body, subject) VALUES ('$from','$to','$mails','$subjects');");
+	
+	if ($query == true) {
+		if(!$mail->send()){
+		    echo 'Message could not be sent.';
+		    echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+		    echo 'Message has been sent';
+		}
 	} else {
-	    echo 'Message has been sent';
+		echo "error";
 	}
+	pg_close($db_handle);
