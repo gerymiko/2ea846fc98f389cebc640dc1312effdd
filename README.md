@@ -1,10 +1,10 @@
-# odeotech2
- code challenge 2
+# Code Challenge
+ Odeo Tech
 
-# config
+# Config
 1. Using mailtrap API https://mailtrap.io/
-2. Set your username and password from mailtrap
+2. Set username and password from mailtrap
 3. Configure DB name as sendmail
 
-# run
+# Run
 access sendmail.php on your browser
